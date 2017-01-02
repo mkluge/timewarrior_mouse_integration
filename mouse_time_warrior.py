@@ -4,10 +4,14 @@ import subprocess
 import time
 import datetime
 
+# the time limit after which the process will call timew stop
 time_limit_minutes = 20
+# the arguments for subprocess
+tw_args = ['C:/cygwin64/bin/run.exe', '-p' ,'/bin', 'bash', '-l', 'C:\cygwin64\home\mkluge\timew_mouse\call_timew.sh']
+
 
 def call_timew(args):
-    theproc = subprocess.Popen(['C:/cygwin64/bin/run.exe', '-p' ,'/bin', 'bash', '-l', 'C:\cygwin64\home\mkluge\call_timew.sh']+args, shell=True)
+    theproc = subprocess.Popen(tw_args+args, shell=True)
     theproc.communicate()
 
 work_stopped = False
