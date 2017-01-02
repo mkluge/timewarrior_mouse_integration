@@ -6,8 +6,12 @@ Adaptation to Linux/Mac should be doable.
 ## Installation
 
 1) edit the variables in the python and the .bat file
+
 2) put the script somewhere
+
 3) add the script to the windows startup
+To access it, press Windows+R, then type shell:startup. Add a link into this folder to the 
+start script.
 
 ## Usage
 
