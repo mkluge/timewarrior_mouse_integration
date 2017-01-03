@@ -3,6 +3,7 @@ import sys
 import subprocess
 import time
 import datetime
+import WindowsBalloonTip
 
 # the time limit after which the process will call timew stop
 time_limit_minutes = 20
@@ -32,8 +33,10 @@ def on_scroll(x, y, dx, dy):
 #    print('Scrolled {0}'.format( (x, y)))
 
 
+w = WindowsBalloonTip.WindowsBalloonTip()
 ml = Listener( on_move=on_move, on_click=on_click, on_scroll=on_scroll)
 ml.start()
+print("started")
 
 while True:
     time.sleep(1)
@@ -45,9 +48,11 @@ while True:
         stoptime=str(last_mouse_move.hour)+":"+str(last_mouse_move.minute)
         call_timew(["stop",stoptime])
         work_stopped=True
+        w.balloon_tip("work stopped", "work stopped", icon_path="stop.ico")
     if work_stopped==True and seconds<10:
         print('work continued')
         call_timew(["continue"])
         work_stopped=False
+        w.balloon_tip("work started", "go, do awesome stuff", icon_path="start.ico", duration=5)
 
 ml.stop()
