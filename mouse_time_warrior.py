@@ -6,12 +6,12 @@ import datetime
 import WindowsBalloonTip
 
 # the time limit after which the process will call timew stop
-time_limit_minutes = 20
+time_limit_minutes = 10
 # the arguments for subprocess
-tw_args = ['C:/cygwin64/bin/run.exe', '-p' ,'/bin', 'bash', '-l', 'C:\cygwin64\home\mkluge\timew_mouse\call_timew.sh']
-
+tw_args = ['C:/cygwin64/bin/run.exe', '-p' ,'/bin', 'bash', '-l', "C:\\cygwin64\\home\\mkluge\\timew_mouse\\call_timew.sh"]
 
 def call_timew(args):
+    global tw_args
     theproc = subprocess.Popen(tw_args+args, shell=True)
     theproc.communicate()
 
@@ -44,13 +44,14 @@ while True:
     seconds = (now - last_mouse_move).seconds
 #    print("last move %d seconds ago" % seconds)
     if work_stopped==False and seconds>time_limit_minutes*60:
-        print('work stopped')
-        stoptime=str(last_mouse_move.hour)+":"+str(last_mouse_move.minute)
+        stoptime=str(last_mouse_move.hour)+":"+'{:02d}'.format(last_mouse_move.minute)
+        print('work stopped '+stoptime)
         call_timew(["stop",stoptime])
         work_stopped=True
         w.balloon_tip("work stopped", "work stopped", icon_path="stop.ico")
     if work_stopped==True and seconds<10:
-        print('work continued')
+        starttime=str(now.hour)+":"+'{:02d}'.format(now.minute)
+        print('work continued '+starttime)
         call_timew(["continue"])
         work_stopped=False
         w.balloon_tip("work started", "go, do awesome stuff", icon_path="start.ico", duration=5)
