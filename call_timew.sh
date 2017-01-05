@@ -6,6 +6,7 @@ export PATH=$PATH:/home/mkluge/bin:/usr/local/bin:/usr/bin:/cygdrive/c/Python27:
 
 cd $HOME
 touch $LOGFILE
-echo `date` >>$LOGFILE 2>&1
+echo -n `date` >>$LOGFILE 2>&1
+echo ": $TIMEW_BINARY $*" >>$LOGFILE 2>&1
 bash -l -c "$TIMEW_BINARY $*" 1>>$LOGFILE 2>&1
 

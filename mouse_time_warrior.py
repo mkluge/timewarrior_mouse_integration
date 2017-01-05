@@ -6,7 +6,7 @@ import datetime
 import WindowsBalloonTip
 
 # the time limit after which the process will call timew stop
-time_limit_minutes = 10
+time_limit_minutes = 20
 # the arguments for subprocess
 tw_args = ['C:/cygwin64/bin/run.exe', '-p' ,'/bin', 'bash', '-l', "C:\\cygwin64\\home\\mkluge\\timew_mouse\\call_timew.sh"]
 
